@@ -9,13 +9,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- *
- * @author 16003059
+* Robbie Mackay
+* Student Number: 16003059
+* HND Computer Science
  */
 public class WarehouseKeeper extends MoveableMapElement implements KeyListener{
     
     WarehouseKeeper(int newX, int newY) {
         super(newX, newY);
+        elementName = "Warehouse Keeper";
+        representingCharecter = "@";  
     }
 
     

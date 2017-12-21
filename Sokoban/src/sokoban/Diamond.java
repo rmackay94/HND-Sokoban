@@ -5,16 +5,16 @@
  */
 package sokoban;
 
-import javax.swing.JComponent;
-
 /**
 * Robbie Mackay
 * Student Number: 16003059
 * HND Computer Science
  */
-public class MapElement extends JComponent{
+public class Diamond extends MapElement {
     
-    String elementName;
-    String representingCharecter;
+    public Diamond() {
+        elementName = "Floor";
+        representingCharecter = ".";  
+    }
     
 }

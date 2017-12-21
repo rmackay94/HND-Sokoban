@@ -6,8 +6,9 @@
 package sokoban;
 
 /**
- *
- * @author 16003059
+* Robbie Mackay
+* Student Number: 16003059
+* HND Computer Science
  */
 public class Sokoban {
 
@@ -16,6 +17,7 @@ public class Sokoban {
      */
     public static void main(String[] args) {
         SokobanGame game = new SokobanGame();
+        game.loadLevel(1);
     }
     
 }
