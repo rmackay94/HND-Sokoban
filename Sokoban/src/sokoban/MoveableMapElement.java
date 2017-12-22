@@ -6,8 +6,9 @@
 package sokoban;
 
 /**
- *
- * @author 16003059
+* Robbie Mackay
+* Student Number: 16003059
+* HND Computer Science
  */
 public class MoveableMapElement extends MapElement {
     Coordinate positionInMap;

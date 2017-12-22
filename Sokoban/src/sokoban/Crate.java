@@ -6,16 +6,16 @@
 package sokoban;
 
 /**
- *
- * @author 16003059
+* Robbie Mackay
+* Student Number: 16003059
+* HND Computer Science
  */
-public class Crate extends MoveableMapElement{
-    
-    
+public class Crate extends MoveableMapElement{   
     
     public Crate(int newX, int newY) {
         super(newX, newY);
         elementName = "Crate";
+        representingCharecter = "*";  
     }
     
 }
