@@ -18,6 +18,7 @@ public class Sokoban {
     public static void main(String[] args) {
         SokobanGame game = new SokobanGame();
         game.loadLevel(1);
+        System.out.println("sdfg");
     }
     
 }

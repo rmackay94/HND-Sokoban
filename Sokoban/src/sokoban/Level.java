@@ -38,7 +38,7 @@ public class Level extends JComponent implements ActionListener{
     }
     
     public void loadMap(int levelNum) throws FileNotFoundException {
-        String levelLocation = "resorces/levels/level" + levelNum + ".txt";
+        String levelLocation = "resources/levels/level" + levelNum + ".txt";
         
         File levelFile = new File(levelLocation);
 
@@ -53,18 +53,25 @@ public class Level extends JComponent implements ActionListener{
         levelHeight = levelScanner.nextInt();
         numberOfCrates = levelScanner.nextInt();
         
+        System.out.println(levelWidth);
+        System.out.println(levelHeight);
+        System.out.println(numberOfCrates);
+        
+        levelScanner.nextLine();  //uses an empty line as the first line-last line is then cut off
+        
         map = new MapElement[levelWidth][levelHeight];
         crates = new Crate[numberOfCrates]; 
         //end of setting array sizes
         
         //populating map array and creating crate and warehousekeeper objects
-        int i = 0;
-        while (levelScanner.hasNextLine()) {
+        int i = 1;
+        while (i<levelHeight) {
             
             String line = levelScanner.nextLine();
             char charecter[] = line.toCharArray();
             int j = 0;
             while (j < charecter.length) {
+            
                 
                 if (charecter[j] == ' ') {
                     map[i][j] = new Floor();
@@ -79,11 +86,16 @@ public class Level extends JComponent implements ActionListener{
                     map[i][j] = new Floor();
                     warehouseKeeper = new WarehouseKeeper(i,j);
                 }
+                System.out.println(map[i][j].elementName);
                 j++;
+                
+                
             }
+            System.out.println();
             i++;
         }
         // End of populating arrays.
+        System.out.println("sdfg");
     }
     
     public void checkForWin() {
