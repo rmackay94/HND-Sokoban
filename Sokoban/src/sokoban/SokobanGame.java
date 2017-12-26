@@ -21,7 +21,7 @@ public class SokobanGame extends JComponent{
     
     SokobanGame() {
         mainWindow = new JFrame();
-        mainWindow.setSize(500,500);
+        mainWindow.setSize(1000,600);
         mainWindow.setLayout(null);      
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,5 +29,7 @@ public class SokobanGame extends JComponent{
     
     public void loadLevel(int levelNumber) {
         Level currentLevel = new Level(currentLevelNum);
+        mainWindow.add(currentLevel);
+        currentLevel.repaint();
     }
 }

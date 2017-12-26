@@ -5,6 +5,8 @@
  */
 package sokoban;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,9 +21,8 @@ public class WarehouseKeeper extends MoveableMapElement implements KeyListener{
         super(newX, newY);
         elementName = "Warehouse Keeper";
         representingCharecter = "@";  
+        setText(representingCharecter);
     }
-
-    
     
     
     

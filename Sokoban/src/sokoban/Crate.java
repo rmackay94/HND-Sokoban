@@ -5,6 +5,9 @@
  */
 package sokoban;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
 * Robbie Mackay
 * Student Number: 16003059
@@ -16,6 +19,13 @@ public class Crate extends MoveableMapElement{
         super(newX, newY);
         elementName = "Crate";
         representingCharecter = "*";  
+        setText(representingCharecter);
     }
+    
+//    @Override
+//    public void paint(Graphics g){
+//        g.setColor(Color.yellow);
+//        g.fillRect(0,0,10,10);
+//    }
     
 }

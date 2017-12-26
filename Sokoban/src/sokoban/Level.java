@@ -5,6 +5,8 @@
  */
 package sokoban;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -28,12 +30,36 @@ public class Level extends JComponent implements ActionListener{
     JLabel numberOfMovesLabel;
     JButton restartLevelButton;
     
+    int levelWidth;     //Width of level will be the length of each line
+    int levelHeight;    //Height of level will be number of lines
+    int numberOfCrates; 
+    
     Level(int levelNum) {
         try {
             loadMap(levelNum);
         } catch (FileNotFoundException ex){
             System.out.println("probloem with level.loadmap  message:" + ex.getMessage());
         };
+        
+        setBounds(10,10,levelWidth*10,levelHeight*10);
+        setVisible(true);
+        
+        int i = 0;
+        while (i<levelHeight) {
+            int j = 0;
+            while (j < levelWidth) {
+                
+//                this.add(map[i][j]);
+//                map[i][j].setVisible(true);
+//                map[i][j].repaint();
+//
+//                this.add(map[i][j]);
+//                map[i][j].setBounds(i*10,j*10,10,10);
+                j++;
+            }
+            i++;
+        }
+        
         
     }
     
@@ -45,9 +71,7 @@ public class Level extends JComponent implements ActionListener{
         Scanner levelScanner = new Scanner(levelFile);
         
         //Setting the sizes of map and crates array.
-        int levelWidth;     //Width of level will be the length of each line
-        int levelHeight;    //Height of level will be number of lines
-        int numberOfCrates;
+        
         
         levelWidth = levelScanner.nextInt();
         levelHeight = levelScanner.nextInt();
@@ -104,6 +128,12 @@ public class Level extends JComponent implements ActionListener{
     
     public void restartLevel() {
         
+    }
+    
+    @Override
+    public void paint(Graphics g){
+        g.setColor(Color.black);
+        g.fillRect(0,0,this.getWidth(),this.getHeight());
     }
 
     

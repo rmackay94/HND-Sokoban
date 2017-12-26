@@ -5,16 +5,25 @@
  */
 package sokoban;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 /**
 * Robbie Mackay
 * Student Number: 16003059
 * HND Computer Science
  */
-public class MapElement extends JComponent{
+public class MapElement extends JLabel{
     
     String elementName;
     String representingCharecter;
+    
+//        @Override
+//    public void paint(Graphics g){
+//        g.setColor(Color.blue);
+//        g.fillRect(0,0,10,10);
+//    }
     
 }
