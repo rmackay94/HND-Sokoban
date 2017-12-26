@@ -41,25 +41,6 @@ public class Level extends JComponent implements ActionListener{
             System.out.println("probloem with level.loadmap  message:" + ex.getMessage());
         };
         
-        setBounds(10,10,levelWidth*10,levelHeight*10);
-        setVisible(true);
-        
-        int i = 0;
-        while (i<levelHeight) {
-            int j = 0;
-            while (j < levelWidth) {
-                
-//                this.add(map[i][j]);
-//                map[i][j].setVisible(true);
-//                map[i][j].repaint();
-//
-//                this.add(map[i][j]);
-//                map[i][j].setBounds(i*10,j*10,10,10);
-                j++;
-            }
-            i++;
-        }
-        
         
     }
     
@@ -84,19 +65,28 @@ public class Level extends JComponent implements ActionListener{
         levelScanner.nextLine();  //uses an empty line as the first line-last line is then cut off
         
         map = new MapElement[levelWidth][levelHeight];
-        crates = new Crate[numberOfCrates]; 
+        crates = new Crate[numberOfCrates];
         //end of setting array sizes
         
+        this.setBounds(10,10,levelWidth*10,levelHeight*10);
+        this.setVisible(true);
+        
+        
         //populating map array and creating crate and warehousekeeper objects
-        int i = 1;
-        while (i<levelHeight) {
+        
+            /*
+            * When using swing the first component added is shown on top of others.
+            * This means that for the warehous keeper and crates to be dsplaed on top of
+            * the map elements they must be added to the level component first.
+            */
             
-            String line = levelScanner.nextLine();
-            char charecter[] = line.toCharArray();
+        int i = 0; 
+        int cratesAdded = 0;
+        while (i < levelHeight) {            
+            String currentLine = levelScanner.nextLine();
+            char charecter[] = currentLine.toCharArray();
             int j = 0;
-            while (j < charecter.length) {
-            
-                
+            while (j < charecter.length) {                            
                 if (charecter[j] == ' ') {
                     map[i][j] = new Floor();
                 } else if (charecter[j] == 'X') {
@@ -104,22 +94,50 @@ public class Level extends JComponent implements ActionListener{
                 } else if (charecter[j] == '.') {
                     map[i][j] = new Diamond();
                 } else if (charecter[j] == '*') {
-                    map[i][j] = new Floor();
-                    crates[0] = new Crate(i,j);
+                    map[i][j] = new Floor();                    
+                    if (cratesAdded > numberOfCrates){ 
+                        System.out.println("Too many crates");
+                    } else {
+                        crates[cratesAdded] = new Crate(i,j);
+                        this.add(crates[cratesAdded]);
+                        crates[cratesAdded].setBounds(j*10,i*10,10,10);
+                        cratesAdded++;
+                    }
                 } else if (charecter[j] == '@') {
                     map[i][j] = new Floor();
                     warehouseKeeper = new WarehouseKeeper(i,j);
+                    this.add(warehouseKeeper);
+                    warehouseKeeper.setBounds(j*10,i*10,10,10);
                 }
-                System.out.println(map[i][j].elementName);
-                j++;
-                
-                
+//                System.out.println(map[i][j].elementName);                
+//                this.add(map[i][j]);
+//                map[i][j].setBounds(j*10,i*10,10,10);
+                j++;                               
             }
             System.out.println();
-            i++;
+            i++;           
         }
-        // End of populating arrays.
-        System.out.println("sdfg");
+        
+        i = 0;
+        while (i < levelHeight) {
+            int j = 0;
+            while (j < levelWidth) {
+                System.out.println(map[i][j].elementName);                
+                this.add(map[i][j]);
+                map[i][j].setBounds(j*10,i*10,10,10);
+                j++; 
+            }
+            i++; 
+        }
+        
+            /*
+            * This line was used to test wether the warehousekeeper and crates would be displyed on top of other map elements.
+            * As in swing components that are added first are displayed on top, the warehousekeeper can be moved to the first
+            * map element added to test wether it it has been added before it and will bbe displayed on top of it.
+            */
+        //warehouseKeeper.setBounds(0,0,10,10);
+        
+        System.out.println("Arrays Populated");
     }
     
     public void checkForWin() {
@@ -129,12 +147,12 @@ public class Level extends JComponent implements ActionListener{
     public void restartLevel() {
         
     }
-    
-    @Override
-    public void paint(Graphics g){
-        g.setColor(Color.black);
-        g.fillRect(0,0,this.getWidth(),this.getHeight());
-    }
+       
+//    @Override
+//    public void paint(Graphics g){
+//        g.setColor(Color.black);
+//        g.drawRect(0,0,this.getWidth(),this.getHeight());
+//    }
 
     
     

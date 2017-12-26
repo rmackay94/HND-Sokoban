@@ -18,14 +18,8 @@ public class Crate extends MoveableMapElement{
     public Crate(int newX, int newY) {
         super(newX, newY);
         elementName = "Crate";
-        representingCharecter = "*";  
-        setText(representingCharecter);
+        representingCharecter = "*";
+        elementColour = Color.red;
     }
-    
-//    @Override
-//    public void paint(Graphics g){
-//        g.setColor(Color.yellow);
-//        g.fillRect(0,0,10,10);
-//    }
     
 }

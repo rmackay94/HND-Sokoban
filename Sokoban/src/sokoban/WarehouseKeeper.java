@@ -22,6 +22,7 @@ public class WarehouseKeeper extends MoveableMapElement implements KeyListener{
         elementName = "Warehouse Keeper";
         representingCharecter = "@";  
         setText(representingCharecter);
+        elementColour = Color.blue;
     }
     
     

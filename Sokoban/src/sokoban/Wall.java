@@ -19,12 +19,7 @@ public class Wall extends MapElement {
         elementName = "Wall";
         representingCharecter = "X";  
         setText(representingCharecter);
+        elementColour = Color.green;
     }
-    
-//    @Override
-//    public void paint(Graphics g){
-//        g.setColor(Color.green);
-//        g.fillRect(0,0,10,10);
-//    }
     
 }

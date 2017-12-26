@@ -19,11 +19,12 @@ public class MapElement extends JLabel{
     
     String elementName;
     String representingCharecter;
+    Color elementColour = Color.gray;
     
-//        @Override
-//    public void paint(Graphics g){
-//        g.setColor(Color.blue);
-//        g.fillRect(0,0,10,10);
-//    }
+    @Override
+    public void paint(Graphics g){
+        g.setColor(elementColour);
+        g.fillRect(0,0,10,10);
+    }
     
 }
