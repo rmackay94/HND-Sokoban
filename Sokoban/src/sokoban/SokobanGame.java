@@ -14,10 +14,10 @@ import javax.swing.JFrame;
 * HND Computer Science
  */
 public class SokobanGame extends JComponent{
-    int currentLevelNum = 1;
-    JFrame mainWindow;
-    StartMenu mainMenu;
-    String levelWonDialog;
+    private int currentLevelNum;
+    private final JFrame mainWindow;
+    private StartMenu mainMenu;
+    private String levelWonDialog;
     
     SokobanGame() {
         mainWindow = new JFrame();
@@ -25,10 +25,15 @@ public class SokobanGame extends JComponent{
         mainWindow.setLayout(null);      
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        StartMenu startMenu = new StartMenu();
+        mainWindow.add(startMenu);
+        SokobanControls controls = new SokobanControls();
+        mainWindow.add(controls);
+        loadLevel(1);
     }
     
     public void loadLevel(int levelNumber) {
-        Level currentLevel = new Level(currentLevelNum);
+        Level currentLevel = new Level(levelNumber);
         mainWindow.add(currentLevel);
         currentLevel.repaint();
     }

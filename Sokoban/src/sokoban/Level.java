@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 * Student Number: 16003059
 * HND Computer Science
  */
-public class Level extends JComponent implements ActionListener{
+public class Level extends JComponent {
     
     MapElement map[][];                 //Arary of MapElements that will not move ie. walls, floors and diamonds
     WarehouseKeeper warehouseKeeper;    //one WarehouseKeeper object
@@ -52,8 +52,6 @@ public class Level extends JComponent implements ActionListener{
         Scanner levelScanner = new Scanner(levelFile);
         
         //Setting the sizes of map and crates array.
-        
-        
         levelWidth = levelScanner.nextInt();
         levelHeight = levelScanner.nextInt();
         numberOfCrates = levelScanner.nextInt();
@@ -140,13 +138,30 @@ public class Level extends JComponent implements ActionListener{
         System.out.println("Arrays Populated");
     }
     
-    public void checkForWin() {
-        
+    public boolean checkForWin() {
+        boolean win = true;
+        int i = 0;
+        while (i < crates.length) {
+            if (map[crates[i].currentPositionInMap.getX()][crates[i].currentPositionInMap.getY()].representingCharecter != ".") {
+                win = false;
+            }
+            i++;
+        }
+        return win;
     }
     
     public void restartLevel() {
+        int i = 0;
+        while (i < crates.length) {
+            crates[i].currentPositionInMap.setX(crates[i].startingPositionInMap.getX());
+            crates[i].currentPositionInMap.setY(crates[i].startingPositionInMap.getY());
+            i++;
+        }
+        warehouseKeeper.currentPositionInMap.setX(warehouseKeeper.startingPositionInMap.getX());
+        warehouseKeeper.currentPositionInMap.setY(warehouseKeeper.startingPositionInMap.getY());
         
     }
+    
        
 //    @Override
 //    public void paint(Graphics g){
@@ -154,14 +169,4 @@ public class Level extends JComponent implements ActionListener{
 //        g.drawRect(0,0,this.getWidth(),this.getHeight());
 //    }
 
-    
-    
-    
-    
-    
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

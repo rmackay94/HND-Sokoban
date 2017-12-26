@@ -11,9 +11,14 @@ package sokoban;
 * HND Computer Science
  */
 public class MoveableMapElement extends MapElement {
-    Coordinate positionInMap;
+    
+    Coordinate currentPositionInMap;
+    Coordinate startingPositionInMap;
     
     MoveableMapElement(int newX, int newY) {
-        positionInMap = new Coordinate(newX, newY);
+        currentPositionInMap = new Coordinate(newX, newY);
+        startingPositionInMap = new Coordinate(newX, newY);
     }
+    
+    
 }

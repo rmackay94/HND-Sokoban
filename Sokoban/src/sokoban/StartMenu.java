@@ -5,11 +5,13 @@
  */
 package sokoban;
 
+import javax.swing.JComponent;
+
 /**
 * Robbie Mackay
 * Student Number: 16003059
 * HND Computer Science
  */
-public class StartMenu {
+public class StartMenu extends JComponent{
     
 }

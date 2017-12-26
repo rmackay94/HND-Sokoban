@@ -5,18 +5,16 @@
  */
 package sokoban;
 
+import javax.swing.JComponent;
+
 /**
 * Robbie Mackay
 * Student Number: 16003059
 * HND Computer Science
  */
-public class Sokoban {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        SokobanGame game = new SokobanGame();
+public class SokobanControls extends JComponent{
+    
+    SokobanControls() {
         
     }
     

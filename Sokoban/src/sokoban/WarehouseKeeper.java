@@ -25,8 +25,42 @@ public class WarehouseKeeper extends MoveableMapElement implements KeyListener{
         elementColour = Color.blue;
     }
     
-    
-    
+//    public void moveElement(KeyEvent ke) {
+//        if (ke.getKeyChar() == 'w'){
+//            moveTo(currentPositionInMap.getX()+1,currentPositionInMap.getY());
+//        } else if (ke.getKeyChar() == 'a'){
+//            moveTo(currentPositionInMap.getX(),currentPositionInMap.getY()-1);
+//        } else if (ke.getKeyChar() == 's'){
+//            moveTo(currentPositionInMap.getX()-1,currentPositionInMap.getY());
+//        } else if (ke.getKeyChar() == 'd'){
+//            moveTo(currentPositionInMap.getX(),currentPositionInMap.getY()+1);
+//        }
+//    }
+//    
+//    public boolean canMoveTo(Coordinate c) {
+//        
+//        if (map[c.getX()][c.getY()].representingCharecter = 'X') {
+//            return true;
+//        }
+//                       return true;
+//    }
+//    
+//        public boolean canMoveTo(int x, int y) {
+//        
+//        if (map[x][y].representingCharecter = 'X') {
+//            return true;
+//        }
+//        
+//        
+//        return true;
+//    }
+//    
+//    public void moveTo(int newX, int newY) {
+//        
+//        canMoveTo(newX, newY);
+//        
+//        int i = 0()
+//    }
     
     
     
@@ -38,11 +72,14 @@ public class WarehouseKeeper extends MoveableMapElement implements KeyListener{
     @Override
     public void keyPressed(KeyEvent ke) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        moveElement(ke);
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
     
 }
