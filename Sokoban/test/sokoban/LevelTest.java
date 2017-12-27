@@ -13,8 +13,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Robbie
+* Robbie Mackay
+* Student Number: 16003059
+* HND Computer Science
  */
 public class LevelTest {
     
@@ -61,12 +62,13 @@ public class LevelTest {
     @Test
     public void testCheckForWin() {
         System.out.println("checkForWin");
-        Level instance = null;
-        boolean expResult = false;
-        boolean result = instance.checkForWin();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level instance = new Level(0);
+        assertFalse(instance.checkForWin());
+        instance.crates[1].setCurrentPosition(2,3);
+        assertFalse(instance.checkForWin());
+        instance.crates[0].setCurrentPosition(1,3);
+        instance.crates[2].setCurrentPosition(3,3);
+        assertTrue(instance.checkForWin());
     }
 
     /**
@@ -76,12 +78,17 @@ public class LevelTest {
     public void testRestartLevel() {
         System.out.println("restartLevel");
         Level instance = new Level(0);
-        instance.warehouseKeeper.currentPositionInMap.setX(0);
-        instance.warehouseKeeper.currentPositionInMap.setY(0);
+        instance.warehouseKeeper.setCurrentPosition(0,0);
+//        instance.crates[0].setCurrentPosition(0,0);
+//        instance.crates[1].setCurrentPosition(0,0);
+//        instance.crates[2].setCurrentPosition(0,0);
+        
+//        Coordinate temp = new Coordinate(1,2);
         instance.restartLevel();
-        // TODO review the generated test code and remove the default call to fail.
-        assertEquals(1,instance.warehouseKeeper.currentPositionInMap.getX());
-        assertEquals(2,instance.warehouseKeeper.currentPositionInMap.getY());
+        
+        assertEquals(2,instance.warehouseKeeper.getXPosition());
+        assertEquals(1,instance.warehouseKeeper.getYPosition());
+        //assertEquals(temp,instance.warehouseKeeper.getCurrentPosition());
     }
     
 }

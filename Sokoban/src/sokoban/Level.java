@@ -96,14 +96,14 @@ public class Level extends JComponent {
                     if (cratesAdded > numberOfCrates){ 
                         System.out.println("Too many crates");
                     } else {
-                        crates[cratesAdded] = new Crate(i,j);
+                        crates[cratesAdded] = new Crate(j,i);
                         this.add(crates[cratesAdded]);
                         crates[cratesAdded].setBounds(j*10,i*10,10,10);
                         cratesAdded++;
                     }
                 } else if (charecter[j] == '@') {
                     map[i][j] = new Floor();
-                    warehouseKeeper = new WarehouseKeeper(i,j);
+                    warehouseKeeper = new WarehouseKeeper(j,i);
                     this.add(warehouseKeeper);
                     warehouseKeeper.setBounds(j*10,i*10,10,10);
                 }
@@ -142,7 +142,7 @@ public class Level extends JComponent {
         boolean win = true;
         int i = 0;
         while (i < crates.length) {
-            if (map[crates[i].currentPositionInMap.getX()][crates[i].currentPositionInMap.getY()].representingCharecter != ".") {
+            if (map[crates[i].getYPosition()][crates[i].getXPosition()].representingCharecter != ".") {
                 win = false;
             }
             i++;
@@ -153,13 +153,10 @@ public class Level extends JComponent {
     public void restartLevel() {
         int i = 0;
         while (i < crates.length) {
-            crates[i].currentPositionInMap.setX(crates[i].startingPositionInMap.getX());
-            crates[i].currentPositionInMap.setY(crates[i].startingPositionInMap.getY());
+            crates[i].resetPosition();
             i++;
         }
-        warehouseKeeper.currentPositionInMap.setX(warehouseKeeper.startingPositionInMap.getX());
-        warehouseKeeper.currentPositionInMap.setY(warehouseKeeper.startingPositionInMap.getY());
-        
+        warehouseKeeper.resetPosition();       
     }
     
        
