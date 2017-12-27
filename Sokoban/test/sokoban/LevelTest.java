@@ -50,10 +50,9 @@ public class LevelTest {
         
             //Checking that all four corners of the map are floor objects.
         assertEquals("Floor",instance.map[0][0].elementName);
-        //assertEquals("Floor",instance.map[5][0].elementName);
-        //assertEquals("Floor",instance.map[0][5].elementName);
-        //assertEquals("Floor",instance.map[5][5].elementName);
-        //fail("The test case is a prototype.");
+        assertEquals("Floor",instance.map[4][0].elementName);
+        assertEquals("Floor",instance.map[0][4].elementName);
+        assertEquals("Floor",instance.map[4][4].elementName);
     }
 
     /**
@@ -76,10 +75,13 @@ public class LevelTest {
     @Test
     public void testRestartLevel() {
         System.out.println("restartLevel");
-        Level instance = null;
+        Level instance = new Level(0);
+        instance.warehouseKeeper.currentPositionInMap.setX(0);
+        instance.warehouseKeeper.currentPositionInMap.setY(0);
         instance.restartLevel();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(1,instance.warehouseKeeper.currentPositionInMap.getX());
+        assertEquals(2,instance.warehouseKeeper.currentPositionInMap.getY());
     }
     
 }
