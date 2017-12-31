@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -21,14 +23,19 @@ import javax.swing.JLabel;
 * Student Number: 16003059
 * HND Computer Science
  */
-public class Level extends JComponent {
+public class Level extends JComponent implements ActionListener{
     
-    MapElement map[][];                 //Arary of MapElements that will not move ie. walls, floors and diamonds
-    WarehouseKeeper warehouseKeeper;    //one WarehouseKeeper object
-    Crate crates[];                     //Array of all crates
-    int numberOfMoves;
+    private MapElement map[][];                 //Arary of MapElements that will not move ie. walls, floors and diamonds
+    public WarehouseKeeper warehouseKeeper;    //one WarehouseKeeper object
+    public Crate crates[];                     //Array of all crates
+    private int numberOfMoves;
     JLabel numberOfMovesLabel;
     JButton restartLevelButton;
+    
+    JButton moveUpButton;
+    JButton moveLeftButton;
+    JButton moveDownButton;
+    JButton moveRightButton;
     
     int levelWidth;     //Width of level will be the length of each line
     int levelHeight;    //Height of level will be number of lines
@@ -41,7 +48,43 @@ public class Level extends JComponent {
             System.out.println("probloem with level.loadmap  message:" + ex.getMessage());
         };
         
+        numberOfMovesLabel = new JLabel("0");
+        add(numberOfMovesLabel);
+        numberOfMovesLabel.setBounds(0,50,10,10);
+        numberOfMovesLabel.setVisible(true);
         
+        
+        restartLevelButton = new JButton("Restart");
+        add(restartLevelButton);
+        restartLevelButton.setBounds(0,75,100,20);
+        restartLevelButton.setVisible(true);
+        restartLevelButton.addActionListener(this);
+        
+        
+        
+        moveUpButton = new JButton("Up");
+        add(moveUpButton);
+        moveUpButton.setBounds(120,10,100,20);
+        moveUpButton.setVisible(true);
+        moveUpButton.addActionListener(this);
+        
+        moveLeftButton = new JButton("Left");
+        add(moveLeftButton);
+        moveLeftButton.setBounds(10,35,100,20);
+        moveLeftButton.setVisible(true);
+        moveLeftButton.addActionListener(this);
+        
+        moveDownButton = new JButton("Down");
+        add(moveDownButton);
+        moveDownButton.setBounds(120,35,100,20);
+        moveDownButton.setVisible(true);
+        moveDownButton.addActionListener(this);
+        
+        moveRightButton = new JButton("Right");
+        add(moveRightButton);
+        moveRightButton.setBounds(230,35,100,20);
+        moveRightButton.setVisible(true);
+        moveRightButton.addActionListener(this);
     }
     
     public void loadMap(int levelNum) throws FileNotFoundException {
@@ -66,7 +109,11 @@ public class Level extends JComponent {
         crates = new Crate[numberOfCrates];
         //end of setting array sizes
         
-        this.setBounds(10,10,levelWidth*10,levelHeight*10);
+        if (levelWidth*20 < 330) {
+            this.setBounds(10,10,330,levelHeight*20+100);
+        } else {
+            this.setBounds(10,10,levelWidth*20,levelHeight*20+100);
+        }
         this.setVisible(true);
         
         
@@ -98,14 +145,15 @@ public class Level extends JComponent {
                     } else {
                         crates[cratesAdded] = new Crate(j,i);
                         this.add(crates[cratesAdded]);
-                        crates[cratesAdded].setBounds(j*10,i*10,10,10);
+                        crates[cratesAdded].setBounds(j*20,100+i*20,20,20);
                         cratesAdded++;
                     }
                 } else if (charecter[j] == '@') {
                     map[i][j] = new Floor();
                     warehouseKeeper = new WarehouseKeeper(j,i);
                     this.add(warehouseKeeper);
-                    warehouseKeeper.setBounds(j*10,i*10,10,10);
+                    this.addKeyListener(warehouseKeeper);
+                    warehouseKeeper.setBounds(j*20,100+i*20,20,20);
                 }
 //                System.out.println(map[i][j].elementName);                
 //                this.add(map[i][j]);
@@ -120,9 +168,9 @@ public class Level extends JComponent {
         while (i < levelHeight) {
             int j = 0;
             while (j < levelWidth) {
-                System.out.println(map[i][j].elementName);                
+                System.out.println(map[i][j].getElementName());                
                 this.add(map[i][j]);
-                map[i][j].setBounds(j*10,i*10,10,10);
+                map[i][j].setBounds(j*20,100+i*20,20,20);
                 j++; 
             }
             i++; 
@@ -142,7 +190,7 @@ public class Level extends JComponent {
         boolean win = true;
         int i = 0;
         while (i < crates.length) {
-            if (map[crates[i].getYPosition()][crates[i].getXPosition()].representingCharecter != ".") {
+            if (map[crates[i].getYPosition()][crates[i].getXPosition()].getRepresentingCharecter() != ".") {
                 win = false;
             }
             i++;
@@ -159,11 +207,26 @@ public class Level extends JComponent {
         warehouseKeeper.resetPosition();       
     }
     
-       
-//    @Override
-//    public void paint(Graphics g){
-//        g.setColor(Color.black);
-//        g.drawRect(0,0,this.getWidth(),this.getHeight());
-//    }
+    public String getMapElementName(int x, int y) {
+        return map[y][x].getElementName();
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.moveUpButton) {
+            System.out.println("Try to move up");
+        } else if (e.getSource() == this.moveLeftButton) {
+            System.out.println("Try to move left");
+        } else if (e.getSource() == this.moveDownButton) {
+            System.out.println("Try to move down");
+        } else if (e.getSource() == this.moveRightButton) {
+            System.out.println("Try to move right");
+        }
+    }
+    
+    
+    
+
+        
 
 }

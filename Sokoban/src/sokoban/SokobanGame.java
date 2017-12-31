@@ -5,6 +5,9 @@
  */
 package sokoban;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -13,11 +16,12 @@ import javax.swing.JFrame;
 * Student Number: 16003059
 * HND Computer Science
  */
-public class SokobanGame extends JComponent{
+public class SokobanGame extends JComponent implements MouseListener {
     private int currentLevelNum;
     private final JFrame mainWindow;
     private StartMenu mainMenu;
     private String levelWonDialog;
+
     
     SokobanGame() {
         mainWindow = new JFrame();
@@ -30,11 +34,69 @@ public class SokobanGame extends JComponent{
         SokobanControls controls = new SokobanControls();
         mainWindow.add(controls);
         loadLevel(1);
+        mainWindow.setFocusable(true);
+        
+        
+                
+        
+        
     }
     
     public void loadLevel(int levelNumber) {
         Level currentLevel = new Level(levelNumber);
         mainWindow.add(currentLevel);
         currentLevel.repaint();
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        requestFocusInWindow();
+        System.out.println("keybroad focus requested");
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

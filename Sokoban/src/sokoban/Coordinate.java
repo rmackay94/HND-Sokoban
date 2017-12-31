@@ -11,8 +11,8 @@ package sokoban;
 * HND Computer Science
  */
 public class Coordinate {
-    int x;
-    int y;
+    private int x;
+    private int y;
     
     Coordinate(int newX, int newY){
         x = newX;

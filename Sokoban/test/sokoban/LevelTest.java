@@ -50,10 +50,10 @@ public class LevelTest {
         // TODO review the generated test code and remove the default call to fail.
         
             //Checking that all four corners of the map are floor objects.
-        assertEquals("Floor",instance.map[0][0].elementName);
-        assertEquals("Floor",instance.map[4][0].elementName);
-        assertEquals("Floor",instance.map[0][4].elementName);
-        assertEquals("Floor",instance.map[4][4].elementName);
+        assertEquals("Floor",instance.getMapElementName(0,0));
+        assertEquals("Floor",instance.getMapElementName(0,4));
+        assertEquals("Floor",instance.getMapElementName(4,0));
+        assertEquals("Floor",instance.getMapElementName(4,4));
     }
 
     /**

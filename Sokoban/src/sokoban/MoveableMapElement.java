@@ -45,11 +45,10 @@ public class MoveableMapElement extends MapElement {
     }
     
     
-   public void resetPosition() {
+    public void resetPosition() {
         currentPositionInMap.setX(startingPositionInMap.getX());
         currentPositionInMap.setY(startingPositionInMap.getY());
         setBounds(startingPositionInMap.getX()*10,startingPositionInMap.getY()*10,10,10);
    }
-    
-    
+        
 }

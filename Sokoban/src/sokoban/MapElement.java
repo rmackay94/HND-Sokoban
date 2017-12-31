@@ -17,6 +17,7 @@ import javax.swing.JLabel;
  */
 public class MapElement extends JLabel{
     
+    //if these are private the sub classes dont work???
     String elementName;
     String representingCharecter;
     Color elementColour = Color.gray;
@@ -24,7 +25,15 @@ public class MapElement extends JLabel{
     @Override
     public void paint(Graphics g){
         g.setColor(elementColour);
-        g.fillRect(0,0,10,10);
+        g.fillRect(0,0,20,20);
+    }
+    
+    public String getElementName() {
+        return elementName;
+    }
+    
+    public String getRepresentingCharecter() {
+        return representingCharecter;
     }
     
 }
