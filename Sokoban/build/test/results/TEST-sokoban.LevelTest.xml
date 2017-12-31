@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="1" hostname="Robbie-Laptop" name="sokoban.LevelTest" skipped="0" tests="3" time="0.547" timestamp="2017-12-27T14:54:41">
+<testsuite errors="0" failures="0" hostname="Robbie-Laptop" name="sokoban.LevelTest" skipped="0" tests="4" time="0.607" timestamp="2017-12-31T20:06:12">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="GB" />
@@ -52,7 +52,7 @@
     <property name="copylibs.rebase" value="true" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner sokoban.LevelTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Robbie\Documents\Netbeans Projects\Sokoban\build\test\results\TEST-sokoban.LevelTest.xml crashfile=C:\Users\Robbie\Documents\Netbeans Projects\Sokoban\build\junitvmwatcher208912139689003883.properties propsfile=C:\Users\Robbie\Documents\Netbeans Projects\Sokoban\build\junit8822537948813193273.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner sokoban.LevelTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Robbie\Documents\Netbeans Projects\Sokoban\build\test\results\TEST-sokoban.LevelTest.xml crashfile=C:\Users\Robbie\Documents\Netbeans Projects\Sokoban\build\junitvmwatcher1694041031376938652.properties propsfile=C:\Users\Robbie\Documents\Netbeans Projects\Sokoban\build\junit3501563250297415920.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -386,13 +386,10 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="sokoban.LevelTest" name="testCheckForWin" time="0.33" />
-  <testcase classname="sokoban.LevelTest" name="testLoadMap" time="0.032" />
-  <testcase classname="sokoban.LevelTest" name="testRestartLevel" time="0.026">
-    <failure message="expected:&lt;sokoban.Coordinate@3f102e87&gt; but was:&lt;sokoban.Coordinate@27abe2cd&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;sokoban.Coordinate@3f102e87&gt; but was:&lt;sokoban.Coordinate@27abe2cd&gt;
-	at sokoban.LevelTest.testRestartLevel(LevelTest.java:90)
-</failure>
-  </testcase>
+  <testcase classname="sokoban.LevelTest" name="testCheckForWin" time="0.369" />
+  <testcase classname="sokoban.LevelTest" name="testLoadMap" time="0.031" />
+  <testcase classname="sokoban.LevelTest" name="testRestartLevel" time="0.011" />
+  <testcase classname="sokoban.LevelTest" name="testMoveElement" time="0.011" />
   <system-out><![CDATA[checkForWin
 5
 5
@@ -532,6 +529,42 @@ Wall
 Wall
 Floor
 Arrays Populated
+moveElement
+5
+5
+3
+
+
+
+
+
+Floor
+Wall
+Wall
+Wall
+Floor
+Wall
+Floor
+Floor
+Floor
+Wall
+Wall
+Floor
+Floor
+Floor
+Wall
+Wall
+Floor
+Floor
+Floor
+Wall
+Floor
+Wall
+Wall
+Wall
+Floor
+Arrays Populated
+Warehouse keeper tried to walk into wall at40 , 1201
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

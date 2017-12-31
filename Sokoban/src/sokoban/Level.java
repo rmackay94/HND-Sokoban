@@ -37,7 +37,7 @@ public class Level extends JComponent implements ActionListener{
     JButton moveDownButton;
     JButton moveRightButton;
     
-    int levelWidth;     //Width of level will be the length of each line
+    int levelWidth;     //Width of level will be the length of each line. This assumes all levels will be rectangular
     int levelHeight;    //Height of level will be number of lines
     int numberOfCrates; 
     
@@ -215,18 +215,83 @@ public class Level extends JComponent implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.moveUpButton) {
             System.out.println("Try to move up");
+            moveElement(warehouseKeeper,"up");
         } else if (e.getSource() == this.moveLeftButton) {
             System.out.println("Try to move left");
+            moveElement(warehouseKeeper,"left");
         } else if (e.getSource() == this.moveDownButton) {
             System.out.println("Try to move down");
+            moveElement(warehouseKeeper,"down");                            
         } else if (e.getSource() == this.moveRightButton) {
             System.out.println("Try to move right");
+            moveElement(warehouseKeeper,"right");
         }
     }
     
     
     
-
+    public boolean moveElement(WarehouseKeeper w, String direction) {
+        boolean canMove = true;
+        Coordinate p;
+        if (direction == "up") {
+            p = new Coordinate(w.getXPosition(),w.getYPosition()-1);
+        } else if (direction == "left") {
+            p = new Coordinate(w.getXPosition()-1,w.getYPosition());
+        } else if (direction == "down") {
+            p = new Coordinate(w.getXPosition(),w.getYPosition()+1);
+        } else {
+            p = new Coordinate(w.getXPosition()+1,w.getYPosition());
+        }
         
-
+        if (map[p.getY()][p.getX()].getElementName() == "Wall") {
+            System.out.println("Warehouse keeper tried to walk into wall at" + w.getX() +" , " + w.getY()+1);
+            canMove = false;
+        } else {
+            for (int i=0; i < numberOfCrates; i++) {
+                if (crates[i].getXPosition() == p.getX() && crates[i].getYPosition() == p.getY()) {
+                    System.out.println("warehouse keper moved into crate " + i);
+                    canMove = moveElement(i,direction);
+                }
+            }
+        }                
+        if (canMove == true) {           
+            warehouseKeeper.setCurrentPosition(p); 
+        }        
+        checkForWin();
+        return canMove;
+    }
+    
+    
+        public boolean moveElement(int c, String direction) {
+        boolean canMove = true;
+        Coordinate p;
+        if (direction == "up") {
+            p = new Coordinate(crates[c].getXPosition(),crates[c].getYPosition()-1);
+        } else if (direction == "left") {
+            p = new Coordinate(crates[c].getXPosition()-1,crates[c].getYPosition());
+        } else if (direction == "down") {
+            p = new Coordinate(crates[c].getXPosition(),crates[c].getYPosition()+1);
+        } else {
+            p = new Coordinate(crates[c].getXPosition()+1,crates[c].getYPosition());
+        }
+        
+        if (map[p.getY()][p.getX()].getElementName() == "Wall") {
+            System.out.println("Crate keeper tried to move into wall at" + crates[c].getX() +" , " + crates[c].getY()+1);
+            canMove = false;
+        } else {
+            for (int i=0; i < numberOfCrates; i++) {
+                if (crates[i].getXPosition() == crates[c].getX() && crates[i].getYPosition() == crates[c].getY()) {
+                    
+                } else if (crates[i].getXPosition() == p.getX() && crates[i].getYPosition() == p.getY()) {
+                    System.out.println("crate moved into crate " + i);
+                    canMove = false;
+                }
+            }
+        }                
+        if (canMove == true) {           
+            crates[c].setCurrentPosition(p); 
+        }        
+        return canMove;
+    }
+    
 }

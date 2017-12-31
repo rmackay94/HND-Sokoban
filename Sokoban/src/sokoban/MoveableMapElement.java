@@ -13,7 +13,7 @@ package sokoban;
 public class MoveableMapElement extends MapElement {
     
     private Coordinate currentPositionInMap;
-    public final Coordinate startingPositionInMap;
+    private final Coordinate startingPositionInMap;
     
     MoveableMapElement(int newX, int newY) {
         currentPositionInMap = new Coordinate(newX, newY);
@@ -23,13 +23,13 @@ public class MoveableMapElement extends MapElement {
     public void setCurrentPosition(int newX, int newY) {
         currentPositionInMap.setX(newX);
         currentPositionInMap.setY(newY);
-        setBounds(newX*10,newY*10,10,10);
+        setBounds(newX*20,100+newY*20,20,20);
     }
     
     public void setCurrentPosition(Coordinate c) {
         currentPositionInMap.setX(c.getX());
         currentPositionInMap.setY(c.getY());
-        setBounds(c.getX()*10,c.getY()*10,10,10);
+        setBounds(c.getX()*20,100+c.getY()*20,20,20);
     }
     
     public Coordinate getCurrentPosition() {
@@ -48,7 +48,7 @@ public class MoveableMapElement extends MapElement {
     public void resetPosition() {
         currentPositionInMap.setX(startingPositionInMap.getX());
         currentPositionInMap.setY(startingPositionInMap.getY());
-        setBounds(startingPositionInMap.getX()*10,startingPositionInMap.getY()*10,10,10);
+        setBounds(startingPositionInMap.getX()*20,100+startingPositionInMap.getY()*20,20,20);
    }
         
 }

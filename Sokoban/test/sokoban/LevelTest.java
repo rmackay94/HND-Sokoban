@@ -91,4 +91,18 @@ public class LevelTest {
         //assertEquals(temp,instance.warehouseKeeper.getCurrentPosition());
     }
     
+    
+    @Test
+    public void testMoveElement() {
+        System.out.println("moveElement");
+        Level instance = new Level(0);
+        
+        assertFalse(instance.moveElement(instance.warehouseKeeper, "up"));
+        assertEquals(2,instance.warehouseKeeper.getXPosition());
+        assertEquals(1,instance.warehouseKeeper.getYPosition());
+        assertTrue(instance.moveElement(instance.warehouseKeeper, "left"));
+        assertEquals(1,instance.warehouseKeeper.getXPosition());
+        assertEquals(1,instance.warehouseKeeper.getYPosition());
+    }
+    
 }
