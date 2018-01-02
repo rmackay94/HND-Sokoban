@@ -105,7 +105,7 @@ public class Level extends JComponent implements ActionListener{
         
         levelScanner.nextLine();  //uses an empty line as the first line-last line is then cut off
         
-        map = new MapElement[levelWidth][levelHeight];
+        map = new MapElement[levelHeight][levelWidth];
         crates = new Crate[numberOfCrates];
         //end of setting array sizes
         
