@@ -50,7 +50,7 @@ public class Level extends JComponent implements ActionListener{
         
         numberOfMovesLabel = new JLabel("0");
         add(numberOfMovesLabel);
-        numberOfMovesLabel.setBounds(0,50,10,10);
+        numberOfMovesLabel.setBounds(5,20,30,20);
         numberOfMovesLabel.setVisible(true);
         
         
@@ -195,6 +195,27 @@ public class Level extends JComponent implements ActionListener{
             }
             i++;
         }
+        
+        if (win == true) {
+            restartLevelButton.setEnabled(false);
+            moveUpButton.setEnabled(false);
+            moveLeftButton.setEnabled(false);
+            moveDownButton.setEnabled(false);
+            moveRightButton.setEnabled(false);
+            
+            restartLevelButton.setVisible(false);
+            moveUpButton.setVisible(false);
+            moveLeftButton.setVisible(false);
+            moveDownButton.setVisible(false);
+            moveRightButton.setVisible(false);
+            
+            JLabel winBox = new JLabel("You have won!");
+            this.add(winBox);
+            winBox.setVisible(true);
+            winBox.setBounds(10,30,100,50);
+        }
+        
+        
         return win;
     }
     
@@ -204,7 +225,8 @@ public class Level extends JComponent implements ActionListener{
             crates[i].resetPosition();
             i++;
         }
-        warehouseKeeper.resetPosition();       
+        warehouseKeeper.resetPosition();   
+        numberOfMoves = 0;
     }
     
     public String getMapElementName(int x, int y) {
@@ -227,9 +249,7 @@ public class Level extends JComponent implements ActionListener{
             moveElement(warehouseKeeper,"right");
         }
     }
-    
-    
-    
+            
     public boolean moveElement(WarehouseKeeper w, String direction) {
         boolean canMove = true;
         Coordinate p;
@@ -255,14 +275,15 @@ public class Level extends JComponent implements ActionListener{
             }
         }                
         if (canMove == true) {           
-            warehouseKeeper.setCurrentPosition(p); 
+            warehouseKeeper.setCurrentPosition(p);
+            numberOfMoves++;
+            numberOfMovesLabel.setText(String.valueOf(numberOfMoves));
         }        
-        checkForWin();
         return canMove;
     }
     
     
-        public boolean moveElement(int c, String direction) {
+    public boolean moveElement(int c, String direction) {
         boolean canMove = true;
         Coordinate p;
         if (direction == "up") {
@@ -289,7 +310,8 @@ public class Level extends JComponent implements ActionListener{
             }
         }                
         if (canMove == true) {           
-            crates[c].setCurrentPosition(p); 
+            crates[c].setCurrentPosition(p);
+            this.checkForWin();
         }        
         return canMove;
     }
