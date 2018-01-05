@@ -279,8 +279,7 @@ public class Level extends JLayeredPane implements ActionListener{
         }        
         return canMove;
     }
-    
-    
+        
     public boolean moveElement(int c, String direction) {
         boolean canMove = true;
         Coordinate p;
