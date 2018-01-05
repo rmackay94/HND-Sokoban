@@ -56,11 +56,7 @@ public class WarehouseKeeper extends MoveableMapElement implements KeyListener, 
 //        return true;
 //    }
     
-    public void moveTo(int newX, int newY) {
-        
-        //canMoveTo(newX, newY);        
-        //int i = 0()
-        
+    public void moveTo(int newX, int newY) {        
         this.setCurrentPosition(newX, newY);
     }
 

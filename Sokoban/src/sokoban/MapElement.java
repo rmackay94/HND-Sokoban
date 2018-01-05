@@ -36,4 +36,9 @@ public class MapElement extends JLabel{
         return representingCharecter;
     }
     
+    public void setBounds(int x, int y) {
+        int size = 20;
+        setBounds(x*size,100+y*size,size,size);
+    }
+    
 }

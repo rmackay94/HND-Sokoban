@@ -23,13 +23,13 @@ public class MoveableMapElement extends MapElement {
     public void setCurrentPosition(int newX, int newY) {
         currentPositionInMap.setX(newX);
         currentPositionInMap.setY(newY);
-        setBounds(newX*20,100+newY*20,20,20);
+        setBounds(newX,newY);
     }
     
     public void setCurrentPosition(Coordinate c) {
         currentPositionInMap.setX(c.getX());
         currentPositionInMap.setY(c.getY());
-        setBounds(c.getX()*20,100+c.getY()*20,20,20);
+        setBounds(c.getX(),c.getY());
     }
     
     public Coordinate getCurrentPosition() {
@@ -48,7 +48,7 @@ public class MoveableMapElement extends MapElement {
     public void resetPosition() {
         currentPositionInMap.setX(startingPositionInMap.getX());
         currentPositionInMap.setY(startingPositionInMap.getY());
-        setBounds(startingPositionInMap.getX()*20,100+startingPositionInMap.getY()*20,20,20);
+        setBounds(startingPositionInMap.getX(),startingPositionInMap.getY());
    }
         
 }

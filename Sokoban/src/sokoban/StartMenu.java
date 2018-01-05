@@ -14,6 +14,8 @@ import javax.swing.JComponent;
  */
 public class StartMenu extends JComponent{
     
+    
+    
     StartMenu() {
         
     }

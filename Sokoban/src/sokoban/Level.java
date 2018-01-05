@@ -145,7 +145,7 @@ public class Level extends JComponent implements ActionListener{
                     } else {
                         crates[cratesAdded] = new Crate(j,i);
                         this.add(crates[cratesAdded]);
-                        crates[cratesAdded].setBounds(j*20,100+i*20,20,20);
+                        crates[cratesAdded].setBounds(j,i);
                         cratesAdded++;
                     }
                 } else if (charecter[j] == '@') {
@@ -153,7 +153,7 @@ public class Level extends JComponent implements ActionListener{
                     warehouseKeeper = new WarehouseKeeper(j,i);
                     this.add(warehouseKeeper);
                     this.addKeyListener(warehouseKeeper);
-                    warehouseKeeper.setBounds(j*20,100+i*20,20,20);
+                    warehouseKeeper.setBounds(j,i);
                 }
 //                System.out.println(map[i][j].elementName);                
 //                this.add(map[i][j]);
@@ -170,7 +170,7 @@ public class Level extends JComponent implements ActionListener{
             while (j < levelWidth) {
                 System.out.println(map[i][j].getElementName());                
                 this.add(map[i][j]);
-                map[i][j].setBounds(j*20,100+i*20,20,20);
+                map[i][j].setBounds(j,i);
                 j++; 
             }
             i++; 
