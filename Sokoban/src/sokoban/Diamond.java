@@ -18,7 +18,6 @@ public class Diamond extends MapElement {
     public Diamond() {
         elementName = "Floor";
         representingCharecter = ".";  
-        setText(representingCharecter);
         elementColour = Color.pink;
     }
     

@@ -9,13 +9,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
 * Robbie Mackay
 * Student Number: 16003059
 * HND Computer Science
  */
-public class MapElement extends JLabel{
+public class MapElement extends JPanel{
     
     //if these are private the sub classes dont work???
     String elementName;

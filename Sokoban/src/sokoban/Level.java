@@ -17,13 +17,14 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 /**
 * Robbie Mackay
 * Student Number: 16003059
 * HND Computer Science
  */
-public class Level extends JComponent implements ActionListener{
+public class Level extends JLayeredPane implements ActionListener{
     
     private MapElement map[][];                 //Arary of MapElements that will not move ie. walls, floors and diamonds
     public WarehouseKeeper warehouseKeeper;    //one WarehouseKeeper object
@@ -49,13 +50,13 @@ public class Level extends JComponent implements ActionListener{
         };
         
         numberOfMovesLabel = new JLabel("0");
-        add(numberOfMovesLabel);
+        add(numberOfMovesLabel, new Integer(0));
         numberOfMovesLabel.setBounds(5,20,30,20);
         numberOfMovesLabel.setVisible(true);
         
         
         restartLevelButton = new JButton("Restart");
-        add(restartLevelButton);
+        add(restartLevelButton, new Integer(0));
         restartLevelButton.setBounds(0,75,100,20);
         restartLevelButton.setVisible(true);
         restartLevelButton.addActionListener(this);
@@ -63,25 +64,25 @@ public class Level extends JComponent implements ActionListener{
         
         
         moveUpButton = new JButton("Up");
-        add(moveUpButton);
+        add(moveUpButton, new Integer(0));
         moveUpButton.setBounds(120,10,100,20);
         moveUpButton.setVisible(true);
         moveUpButton.addActionListener(this);
         
         moveLeftButton = new JButton("Left");
-        add(moveLeftButton);
+        add(moveLeftButton, new Integer(0));
         moveLeftButton.setBounds(10,35,100,20);
         moveLeftButton.setVisible(true);
         moveLeftButton.addActionListener(this);
         
         moveDownButton = new JButton("Down");
-        add(moveDownButton);
+        add(moveDownButton, new Integer(0));
         moveDownButton.setBounds(120,35,100,20);
         moveDownButton.setVisible(true);
         moveDownButton.addActionListener(this);
         
         moveRightButton = new JButton("Right");
-        add(moveRightButton);
+        add(moveRightButton, new Integer(0));
         moveRightButton.setBounds(230,35,100,20);
         moveRightButton.setVisible(true);
         moveRightButton.addActionListener(this);
@@ -144,20 +145,17 @@ public class Level extends JComponent implements ActionListener{
                         System.out.println("Too many crates");
                     } else {
                         crates[cratesAdded] = new Crate(j,i);
-                        this.add(crates[cratesAdded]);
+                        this.add(crates[cratesAdded], new Integer(1));
                         crates[cratesAdded].setBounds(j,i);
                         cratesAdded++;
                     }
                 } else if (charecter[j] == '@') {
                     map[i][j] = new Floor();
                     warehouseKeeper = new WarehouseKeeper(j,i);
-                    this.add(warehouseKeeper);
+                    this.add(warehouseKeeper, new Integer(1));
                     this.addKeyListener(warehouseKeeper);
                     warehouseKeeper.setBounds(j,i);
                 }
-//                System.out.println(map[i][j].elementName);                
-//                this.add(map[i][j]);
-//                map[i][j].setBounds(j*10,i*10,10,10);
                 j++;                               
             }
             System.out.println();
@@ -169,7 +167,7 @@ public class Level extends JComponent implements ActionListener{
             int j = 0;
             while (j < levelWidth) {
                 System.out.println(map[i][j].getElementName());                
-                this.add(map[i][j]);
+                this.add(map[i][j], new Integer(0));
                 map[i][j].setBounds(j,i);
                 j++; 
             }
@@ -210,7 +208,7 @@ public class Level extends JComponent implements ActionListener{
             moveRightButton.setVisible(false);
             
             JLabel winBox = new JLabel("You have won!");
-            this.add(winBox);
+            this.add(winBox, new Integer(1));
             winBox.setVisible(true);
             winBox.setBounds(10,30,100,50);
         }

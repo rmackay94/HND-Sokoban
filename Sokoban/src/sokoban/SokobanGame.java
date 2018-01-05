@@ -33,7 +33,7 @@ public class SokobanGame extends JComponent implements MouseListener {
         mainWindow.add(startMenu);
         SokobanControls controls = new SokobanControls();
         mainWindow.add(controls);
-        loadLevel(5);                                    
+        loadLevel(1);                                    
     }
     
     public void loadLevel(int levelNumber) {

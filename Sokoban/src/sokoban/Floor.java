@@ -19,7 +19,6 @@ public class Floor extends MapElement {
         
         elementName = "Floor";
         representingCharecter = " ";   
-        setText(representingCharecter);
         elementColour = Color.white;
     }
     

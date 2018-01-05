@@ -18,7 +18,6 @@ public class Wall extends MapElement {
     public Wall() {
         elementName = "Wall";
         representingCharecter = "X";  
-        setText(representingCharecter);
         elementColour = Color.green;
     }
     
