@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 public class MapElement extends JPanel{
     
     //if these are private the sub classes dont work???
-    String elementName;
-    String representingCharecter;
-    Color elementColour = Color.gray;
+    private String elementName;
+    private String representingCharecter;
+    private Color elementColour = Color.gray;
     
     @Override
     public void paint(Graphics g){
@@ -42,4 +42,15 @@ public class MapElement extends JPanel{
         setBounds(x*size,100+y*size,size,size);
     }
     
+    public void setElementName(String newName) {
+        elementName = newName;
+    }
+    
+    public void setRepresentingCharecter(String newCharecter) {
+        representingCharecter = newCharecter;
+    }
+    
+    public void setElementColour(Color newColor) {
+        elementColour = newColor;
+    }
 }

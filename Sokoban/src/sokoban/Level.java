@@ -6,16 +6,12 @@
 package sokoban;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
@@ -27,20 +23,20 @@ import javax.swing.JLayeredPane;
 public class Level extends JLayeredPane implements ActionListener{
     
     private MapElement map[][];                 //Arary of MapElements that will not move ie. walls, floors and diamonds
-    public WarehouseKeeper warehouseKeeper;    //one WarehouseKeeper object
-    public Crate crates[];                     //Array of all crates
+    private WarehouseKeeper warehouseKeeper;    //one WarehouseKeeper object
+    private Crate crates[];                     //Array of all crates
     private int numberOfMoves;
-    JLabel numberOfMovesLabel;
-    JButton restartLevelButton;
+    private JLabel numberOfMovesLabel;
+    private JButton restartLevelButton;
     
-    JButton moveUpButton;
-    JButton moveLeftButton;
-    JButton moveDownButton;
-    JButton moveRightButton;
+    private JButton moveUpButton;
+    private JButton moveLeftButton;
+    private JButton moveDownButton;
+    private JButton moveRightButton;
     
-    int levelWidth;     //Width of level will be the length of each line. This assumes all levels will be rectangular
-    int levelHeight;    //Height of level will be number of lines
-    int numberOfCrates; 
+    private int levelWidth;     //Width of level will be the length of each line. This assumes all levels will be rectangular
+    private int levelHeight;    //Height of level will be number of lines
+    private int numberOfCrates; 
     
     Level(int levelNum) {
         try {
@@ -153,7 +149,6 @@ public class Level extends JLayeredPane implements ActionListener{
                     map[i][j] = new Floor();
                     warehouseKeeper = new WarehouseKeeper(j,i);
                     this.add(warehouseKeeper, new Integer(1));
-                    this.addKeyListener(warehouseKeeper);
                     warehouseKeeper.setBounds(j,i);
                 }
                 j++;                               
@@ -190,6 +185,9 @@ public class Level extends JLayeredPane implements ActionListener{
         while (i < crates.length) {
             if (map[crates[i].getYPosition()][crates[i].getXPosition()].getRepresentingCharecter() != ".") {
                 win = false;
+                crates[i].setElementColour(Color.red);
+            } else {
+                crates[i].setElementColour(Color.DARK_GRAY);
             }
             i++;
         }
@@ -245,6 +243,8 @@ public class Level extends JLayeredPane implements ActionListener{
         } else if (e.getSource() == this.moveRightButton) {
             System.out.println("Try to move right");
             moveElement(warehouseKeeper,"right");
+        } else if (e.getSource() == this.restartLevelButton) {
+            restartLevel();
         }
     }
             
@@ -279,7 +279,8 @@ public class Level extends JLayeredPane implements ActionListener{
         }        
         return canMove;
     }
-        
+    
+    
     public boolean moveElement(int c, String direction) {
         boolean canMove = true;
         Coordinate p;

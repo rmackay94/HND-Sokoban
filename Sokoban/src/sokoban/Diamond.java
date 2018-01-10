@@ -16,9 +16,10 @@ import java.awt.Graphics;
 public class Diamond extends MapElement {
     
     public Diamond() {
-        elementName = "Floor";
-        representingCharecter = ".";  
-        elementColour = Color.pink;
+        
+        setElementName("Floor");
+        setRepresentingCharecter(".");
+        setElementColour(Color.pink);
     }
     
 }

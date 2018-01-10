@@ -17,9 +17,9 @@ public class Crate extends MoveableMapElement{
     
     public Crate(int newX, int newY) {
         super(newX, newY);
-        elementName = "Crate";
-        representingCharecter = "*";
-        elementColour = Color.red;
+        setElementName("Crate");
+        setRepresentingCharecter("*");
+        setElementColour(Color.red);
     }
     
 }

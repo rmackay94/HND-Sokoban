@@ -16,9 +16,10 @@ import java.awt.Graphics;
 public class Wall extends MapElement {
     
     public Wall() {
-        elementName = "Wall";
-        representingCharecter = "X";  
-        elementColour = Color.green;
+        
+        setElementName("Wall");
+        setRepresentingCharecter("X");
+        setElementColour(Color.green);
     }
     
 }
