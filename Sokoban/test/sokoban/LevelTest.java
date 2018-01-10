@@ -64,10 +64,10 @@ public class LevelTest {
         System.out.println("checkForWin");
         Level instance = new Level(0);
         assertFalse(instance.checkForWin());
-        instance.crates[1].setCurrentPosition(2,3);
+        instance.setElementPosition(1,2,3);
         assertFalse(instance.checkForWin());
-        instance.crates[0].setCurrentPosition(1,3);
-        instance.crates[2].setCurrentPosition(3,3);
+        instance.setElementPosition(0,1,3);
+        instance.setElementPosition(2,3,3);
         assertTrue(instance.checkForWin());
     }
 
@@ -78,7 +78,7 @@ public class LevelTest {
     public void testRestartLevel() {
         System.out.println("restartLevel");
         Level instance = new Level(0);
-        instance.warehouseKeeper.setCurrentPosition(0,0);
+        instance.setElementPosition(0,0);
 //        instance.crates[0].setCurrentPosition(0,0);
 //        instance.crates[1].setCurrentPosition(0,0);
 //        instance.crates[2].setCurrentPosition(0,0);
@@ -86,8 +86,8 @@ public class LevelTest {
 //        Coordinate temp = new Coordinate(1,2);
         instance.restartLevel();
         
-        assertEquals(2,instance.warehouseKeeper.getXPosition());
-        assertEquals(1,instance.warehouseKeeper.getYPosition());
+        assertEquals(2,instance.getElementXPosition());
+        assertEquals(1,instance.getElementYPosition());
         //assertEquals(temp,instance.warehouseKeeper.getCurrentPosition());
     }
     
@@ -97,12 +97,12 @@ public class LevelTest {
         System.out.println("moveElement");
         Level instance = new Level(0);
         
-        assertFalse(instance.moveElement(instance.warehouseKeeper, "up"));
-        assertEquals(2,instance.warehouseKeeper.getXPosition());
-        assertEquals(1,instance.warehouseKeeper.getYPosition());
-        assertTrue(instance.moveElement(instance.warehouseKeeper, "left"));
-        assertEquals(1,instance.warehouseKeeper.getXPosition());
-        assertEquals(1,instance.warehouseKeeper.getYPosition());
+        assertFalse(instance.moveElement("up"));
+        assertEquals(2,instance.getElementXPosition());
+        assertEquals(1,instance.getElementYPosition());
+        assertTrue(instance.moveElement("left"));
+        assertEquals(1,instance.getElementXPosition());
+        assertEquals(1,instance.getElementYPosition());
     }
     
 }

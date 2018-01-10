@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 * Student Number: 16003059
 * HND Computer Science
  */
-public class SokobanGame extends JComponent implements MouseListener {
+public class SokobanGame extends JComponent{
     private int currentLevelNum;
     private final JFrame mainWindow;
     private StartMenu mainMenu;
@@ -40,57 +40,6 @@ public class SokobanGame extends JComponent implements MouseListener {
         Level currentLevel = new Level(levelNumber);
         mainWindow.add(currentLevel);
         currentLevel.repaint();
-    }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        requestFocusInWindow();
-        System.out.println("keybroad focus requested");
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }    
+   
 }

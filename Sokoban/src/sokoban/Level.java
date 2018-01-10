@@ -233,36 +233,36 @@ public class Level extends JLayeredPane implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.moveUpButton) {
             System.out.println("Try to move up");
-            moveElement(warehouseKeeper,"up");
+            moveElement("up");
         } else if (e.getSource() == this.moveLeftButton) {
             System.out.println("Try to move left");
-            moveElement(warehouseKeeper,"left");
+            moveElement("left");
         } else if (e.getSource() == this.moveDownButton) {
             System.out.println("Try to move down");
-            moveElement(warehouseKeeper,"down");                            
+            moveElement("down");                            
         } else if (e.getSource() == this.moveRightButton) {
             System.out.println("Try to move right");
-            moveElement(warehouseKeeper,"right");
+            moveElement("right");
         } else if (e.getSource() == this.restartLevelButton) {
             restartLevel();
         }
     }
             
-    public boolean moveElement(WarehouseKeeper w, String direction) {
+    public boolean moveElement(String direction) {
         boolean canMove = true;
         Coordinate p;
         if (direction == "up") {
-            p = new Coordinate(w.getXPosition(),w.getYPosition()-1);
+            p = new Coordinate(warehouseKeeper.getXPosition(),warehouseKeeper.getYPosition()-1);
         } else if (direction == "left") {
-            p = new Coordinate(w.getXPosition()-1,w.getYPosition());
+            p = new Coordinate(warehouseKeeper.getXPosition()-1,warehouseKeeper.getYPosition());
         } else if (direction == "down") {
-            p = new Coordinate(w.getXPosition(),w.getYPosition()+1);
+            p = new Coordinate(warehouseKeeper.getXPosition(),warehouseKeeper.getYPosition()+1);
         } else {
-            p = new Coordinate(w.getXPosition()+1,w.getYPosition());
+            p = new Coordinate(warehouseKeeper.getXPosition()+1,warehouseKeeper.getYPosition());
         }
         
         if (map[p.getY()][p.getX()].getElementName() == "Wall") {
-            System.out.println("Warehouse keeper tried to walk into wall at" + w.getX() +" , " + w.getY()+1);
+            System.out.println("Warehouse keeper tried to walk into wall at" + warehouseKeeper.getX() +" , " + warehouseKeeper.getY()+1);
             canMove = false;
         } else {
             for (int i=0; i < numberOfCrates; i++) {
@@ -312,6 +312,37 @@ public class Level extends JLayeredPane implements ActionListener{
             this.checkForWin();
         }        
         return canMove;
+    }
+    
+    
+    // Setting warehouseKeeper position. used for testing
+    public void setElementPosition(int newX, int newY) {
+        warehouseKeeper.setCurrentPosition(newX, newY);
+    }    
+    
+    // Setting crate position. Used in testing
+    public void setElementPosition(int crateNumber, int newX, int newY) {
+        crates[crateNumber].setCurrentPosition(newX, newY);
+    }
+    
+    //Getting warehouseKeeper X position. Used in testing
+    public int getElementXPosition() {
+        return warehouseKeeper.getXPosition();
+    }
+    
+    //Getting warehouseKeeper Y position. Used in testing
+    public int getElementYPosition() {
+        return warehouseKeeper.getYPosition();
+    }
+    
+    //Getting crate X position. Used in testing
+    public int getElementXPosition(int crateNumber) {
+        return crates[crateNumber].getXPosition();
+    }
+    
+    //Getting crate Y position. Used in testing
+    public int getElementYPosition(int crateNumber) {
+        return crates[crateNumber].getXPosition();
     }
     
 }
