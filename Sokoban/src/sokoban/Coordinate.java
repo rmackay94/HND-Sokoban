@@ -34,4 +34,13 @@ public class Coordinate {
     public void setY(int newY) {
         y = newY;
     }
+    
+    //Takes a Coordinate object and returns true if the values of x and y are the same in both Coordinates
+    public boolean equals(Coordinate c) {
+        if (c.getX() == getX() && c.getY() == getY()) {
+            return true;
+        } else {
+            return false;
+        }        
+    }
 }

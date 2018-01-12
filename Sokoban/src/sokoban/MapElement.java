@@ -7,8 +7,6 @@ package sokoban;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -18,7 +16,6 @@ import javax.swing.JPanel;
  */
 public class MapElement extends JPanel{
     
-    //if these are private the sub classes dont work???
     private String elementName;
     private String representingCharecter;
     private Color elementColour = Color.gray;
@@ -37,6 +34,7 @@ public class MapElement extends JPanel{
         return representingCharecter;
     }
     
+    //This method positions the map element correctly on the screen so that the reset button and number of moves label are displayed above it 
     public void setBounds(int x, int y) {
         int size = 20;
         setBounds(x*size,100+y*size,size,size);

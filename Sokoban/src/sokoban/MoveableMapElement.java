@@ -13,7 +13,7 @@ package sokoban;
 public class MoveableMapElement extends MapElement {
     
     private Coordinate currentPositionInMap;
-    private final Coordinate startingPositionInMap;
+    private final Coordinate startingPositionInMap; //Stores the inital position in the map so that the element can be resset to its initial position
     
     MoveableMapElement(int newX, int newY) {
         currentPositionInMap = new Coordinate(newX, newY);
@@ -43,8 +43,7 @@ public class MoveableMapElement extends MapElement {
     public int getYPosition() {
         return currentPositionInMap.getY();
     }
-    
-    
+       
     public void resetPosition() {
         currentPositionInMap.setX(startingPositionInMap.getX());
         currentPositionInMap.setY(startingPositionInMap.getY());

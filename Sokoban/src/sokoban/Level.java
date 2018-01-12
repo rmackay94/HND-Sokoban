@@ -29,11 +29,6 @@ public class Level extends JLayeredPane implements ActionListener{
     private JLabel numberOfMovesLabel;
     private JButton restartLevelButton;
     
-    private JButton moveUpButton;
-    private JButton moveLeftButton;
-    private JButton moveDownButton;
-    private JButton moveRightButton;
-    
     private int levelWidth;     //Width of level will be the length of each line. This assumes all levels will be rectangular
     private int levelHeight;    //Height of level will be number of lines
     private int numberOfCrates; 
@@ -55,33 +50,7 @@ public class Level extends JLayeredPane implements ActionListener{
         add(restartLevelButton, new Integer(0));
         restartLevelButton.setBounds(0,75,100,20);
         restartLevelButton.setVisible(true);
-        restartLevelButton.addActionListener(this);
-        
-        
-        
-        moveUpButton = new JButton("Up");
-        add(moveUpButton, new Integer(0));
-        moveUpButton.setBounds(120,10,100,20);
-        moveUpButton.setVisible(true);
-        moveUpButton.addActionListener(this);
-        
-        moveLeftButton = new JButton("Left");
-        add(moveLeftButton, new Integer(0));
-        moveLeftButton.setBounds(10,35,100,20);
-        moveLeftButton.setVisible(true);
-        moveLeftButton.addActionListener(this);
-        
-        moveDownButton = new JButton("Down");
-        add(moveDownButton, new Integer(0));
-        moveDownButton.setBounds(120,35,100,20);
-        moveDownButton.setVisible(true);
-        moveDownButton.addActionListener(this);
-        
-        moveRightButton = new JButton("Right");
-        add(moveRightButton, new Integer(0));
-        moveRightButton.setBounds(230,35,100,20);
-        moveRightButton.setVisible(true);
-        moveRightButton.addActionListener(this);
+        restartLevelButton.addActionListener(this);              
     }
     
     public void loadMap(int levelNum) throws FileNotFoundException {
@@ -107,20 +76,14 @@ public class Level extends JLayeredPane implements ActionListener{
         //end of setting array sizes
         
         if (levelWidth*20 < 330) {
-            this.setBounds(10,10,330,levelHeight*20+100);
+            this.setBounds(10,100,330,levelHeight*20+100);
         } else {
-            this.setBounds(10,10,levelWidth*20,levelHeight*20+100);
+            this.setBounds(10,100,levelWidth*20,levelHeight*20+100);
         }
         this.setVisible(true);
         
         
         //populating map array and creating crate and warehousekeeper objects
-        
-            /*
-            * When using swing the first component added is shown on top of others.
-            * This means that for the warehous keeper and crates to be dsplaed on top of
-            * the map elements they must be added to the level component first.
-            */
             
         int i = 0; 
         int cratesAdded = 0;
@@ -167,53 +130,10 @@ public class Level extends JLayeredPane implements ActionListener{
                 j++; 
             }
             i++; 
-        }
-        
-            /*
-            * This line was used to test wether the warehousekeeper and crates would be displyed on top of other map elements.
-            * As in swing components that are added first are displayed on top, the warehousekeeper can be moved to the first
-            * map element added to test wether it it has been added before it and will bbe displayed on top of it.
-            */
-        //warehouseKeeper.setBounds(0,0,10,10);
-        
+        }      
+            
         System.out.println("Arrays Populated");
-    }
-    
-    public boolean checkForWin() {
-        boolean win = true;
-        int i = 0;
-        while (i < crates.length) {
-            if (map[crates[i].getYPosition()][crates[i].getXPosition()].getRepresentingCharecter() != ".") {
-                win = false;
-                crates[i].setElementColour(Color.red);
-            } else {
-                crates[i].setElementColour(Color.DARK_GRAY);
-            }
-            i++;
-        }
-        
-        if (win == true) {
-            restartLevelButton.setEnabled(false);
-            moveUpButton.setEnabled(false);
-            moveLeftButton.setEnabled(false);
-            moveDownButton.setEnabled(false);
-            moveRightButton.setEnabled(false);
-            
-            restartLevelButton.setVisible(false);
-            moveUpButton.setVisible(false);
-            moveLeftButton.setVisible(false);
-            moveDownButton.setVisible(false);
-            moveRightButton.setVisible(false);
-            
-            JLabel winBox = new JLabel("You have won!");
-            this.add(winBox, new Integer(1));
-            winBox.setVisible(true);
-            winBox.setBounds(10,30,100,50);
-        }
-        
-        
-        return win;
-    }
+    }    
     
     public void restartLevel() {
         int i = 0;
@@ -223,6 +143,7 @@ public class Level extends JLayeredPane implements ActionListener{
         }
         warehouseKeeper.resetPosition();   
         numberOfMoves = 0;
+        numberOfMovesLabel.setText(String.valueOf(numberOfMoves));
     }
     
     public String getMapElementName(int x, int y) {
@@ -231,19 +152,7 @@ public class Level extends JLayeredPane implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.moveUpButton) {
-            System.out.println("Try to move up");
-            moveElement("up");
-        } else if (e.getSource() == this.moveLeftButton) {
-            System.out.println("Try to move left");
-            moveElement("left");
-        } else if (e.getSource() == this.moveDownButton) {
-            System.out.println("Try to move down");
-            moveElement("down");                            
-        } else if (e.getSource() == this.moveRightButton) {
-            System.out.println("Try to move right");
-            moveElement("right");
-        } else if (e.getSource() == this.restartLevelButton) {
+        if (e.getSource() == this.restartLevelButton) {
             restartLevel();
         }
     }
@@ -309,11 +218,9 @@ public class Level extends JLayeredPane implements ActionListener{
         }                
         if (canMove == true) {           
             crates[c].setCurrentPosition(p);
-            this.checkForWin();
         }        
         return canMove;
     }
-    
     
     // Setting warehouseKeeper position. used for testing
     public void setElementPosition(int newX, int newY) {
@@ -325,24 +232,39 @@ public class Level extends JLayeredPane implements ActionListener{
         crates[crateNumber].setCurrentPosition(newX, newY);
     }
     
-    //Getting warehouseKeeper X position. Used in testing
+    //Getting warehouseKeeper X position
     public int getElementXPosition() {
         return warehouseKeeper.getXPosition();
     }
     
-    //Getting warehouseKeeper Y position. Used in testing
+    //Getting warehouseKeeper Y position
     public int getElementYPosition() {
         return warehouseKeeper.getYPosition();
     }
     
-    //Getting crate X position. Used in testing
+    //Getting crate X position
     public int getElementXPosition(int crateNumber) {
         return crates[crateNumber].getXPosition();
     }
     
-    //Getting crate Y position. Used in testing
+    //Getting crate Y position
     public int getElementYPosition(int crateNumber) {
         return crates[crateNumber].getXPosition();
     }
     
+    public String getElementRepresentingCharecter(int x, int y) {
+        return map[y][x].getRepresentingCharecter();
+    }
+        
+    public int getNumberOfCrates() {
+        return numberOfCrates;
+    }
+    
+    public void toggleCrateOnDiamond(int crateNumber, boolean onDiamond) {
+        if (onDiamond == true) {
+            crates[crateNumber].setElementColour(Color.DARK_GRAY);
+        } else {
+            crates[crateNumber].setElementColour(Color.red);
+        }
+    }
 }
