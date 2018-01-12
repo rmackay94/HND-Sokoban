@@ -7,6 +7,7 @@ package sokoban;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -82,6 +83,21 @@ public class SokobanGame extends JComponent implements ActionListener{
     
     public void loadLevel(int levelNumber) {
         currentLevel = new Level(currentLevelNum);
+        
+        try {
+            currentLevel.loadMap(currentLevelNum);
+        } catch (FileNotFoundException ex){
+            System.out.println("problem with level.loadmap  message:" + ex.getMessage());
+            JLabel errorMessage = new JLabel("Could not find level file. Error: " + ex.getMessage());
+            this.add(errorMessage);
+            errorMessage.setBounds(100,100,100,100);
+            errorMessage.setVisible(true);
+            
+            moveUpButton.setEnabled(false);
+            moveLeftButton.setEnabled(false);
+            moveDownButton.setEnabled(false);
+            moveRightButton.setEnabled(false);
+        };
         mainWindow.add(currentLevel);
         currentLevel.repaint();
     }    

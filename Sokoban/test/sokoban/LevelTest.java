@@ -57,21 +57,6 @@ public class LevelTest {
     }
 
     /**
-     * Test of checkForWin method, of class Level.
-     */
-    @Test
-    public void testCheckForWin() {
-        System.out.println("checkForWin");
-        Level instance = new Level(0);
-        assertFalse(instance.checkForWin());
-        instance.setElementPosition(1,2,3);
-        assertFalse(instance.checkForWin());
-        instance.setElementPosition(0,1,3);
-        instance.setElementPosition(2,3,3);
-        assertTrue(instance.checkForWin());
-    }
-
-    /**
      * Test of restartLevel method, of class Level.
      */
     @Test

@@ -34,11 +34,6 @@ public class Level extends JLayeredPane implements ActionListener{
     private int numberOfCrates; 
     
     Level(int levelNum) {
-        try {
-            loadMap(levelNum);
-        } catch (FileNotFoundException ex){
-            System.out.println("probloem with level.loadmap  message:" + ex.getMessage());
-        };
         
         numberOfMovesLabel = new JLabel("0");
         add(numberOfMovesLabel, new Integer(0));
@@ -188,8 +183,7 @@ public class Level extends JLayeredPane implements ActionListener{
         }        
         return canMove;
     }
-    
-    
+        
     public boolean moveElement(int c, String direction) {
         boolean canMove = true;
         Coordinate p;
