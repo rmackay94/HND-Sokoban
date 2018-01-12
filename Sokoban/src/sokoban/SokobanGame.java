@@ -22,7 +22,6 @@ public class SokobanGame extends JComponent implements ActionListener{
     
     private int currentLevelNum;
     private final JFrame mainWindow;
-    private StartMenu mainMenu;
     private Level currentLevel;
 
     private JButton moveUpButton;
@@ -38,10 +37,6 @@ public class SokobanGame extends JComponent implements ActionListener{
         mainWindow.setLayout(null);      
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        StartMenu startMenu = new StartMenu();
-//        mainWindow.add(startMenu);
-//        SokobanControls controls = new SokobanControls();
-//        mainWindow.add(controls);
         
         
         nextLevelButton = new JButton("Go to next Level");
@@ -83,7 +78,7 @@ public class SokobanGame extends JComponent implements ActionListener{
     
     public void loadLevel(int levelNumber) {
         currentLevel = new Level(currentLevelNum);
-        
+        boolean exceptionOccured = false;
         try {
             currentLevel.loadMap(currentLevelNum);
         } catch (FileNotFoundException ex){
@@ -97,9 +92,15 @@ public class SokobanGame extends JComponent implements ActionListener{
             moveLeftButton.setEnabled(false);
             moveDownButton.setEnabled(false);
             moveRightButton.setEnabled(false);
+            
+            exceptionOccured = true;
+        } finally {
+            if (exceptionOccured == false) {
+                mainWindow.add(currentLevel);
+                currentLevel.repaint();
+            } 
         };
-        mainWindow.add(currentLevel);
-        currentLevel.repaint();
+
     }    
    
     
