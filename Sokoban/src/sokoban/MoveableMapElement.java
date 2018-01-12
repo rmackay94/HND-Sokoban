@@ -43,7 +43,8 @@ public class MoveableMapElement extends MapElement {
     public int getYPosition() {
         return currentPositionInMap.getY();
     }
-       
+    
+    //Sets the current position of the element to the starting position that is stored when the element is created.
     public void resetPosition() {
         currentPositionInMap.setX(startingPositionInMap.getX());
         currentPositionInMap.setY(startingPositionInMap.getY());

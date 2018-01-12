@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -48,7 +49,7 @@ public class Level extends JLayeredPane implements ActionListener{
         restartLevelButton.addActionListener(this);              
     }
     
-    public void loadMap(int levelNum) throws FileNotFoundException {
+    public void loadMap(int levelNum) throws FileNotFoundException, NullPointerException, NoSuchElementException, ArrayIndexOutOfBoundsException {
         String levelLocation = "resources/levels/level" + levelNum + ".txt";
         
         File levelFile = new File(levelLocation);
@@ -56,6 +57,7 @@ public class Level extends JLayeredPane implements ActionListener{
         Scanner levelScanner = new Scanner(levelFile);
         
         //Setting the sizes of map and crates array.
+        //All levels must have three lines with the level wdith, level height and number of crates in that order.
         levelWidth = levelScanner.nextInt();
         levelHeight = levelScanner.nextInt();
         numberOfCrates = levelScanner.nextInt();
@@ -70,6 +72,8 @@ public class Level extends JLayeredPane implements ActionListener{
         crates = new Crate[numberOfCrates];
         //end of setting array sizes
         
+        
+        //The minimum width of the level must be large enough to display the reset button and numberOfMovesLabel.
         if (levelWidth*20 < 330) {
             this.setBounds(10,100,330,levelHeight*20+100);
         } else {
@@ -78,8 +82,16 @@ public class Level extends JLayeredPane implements ActionListener{
         this.setVisible(true);
         
         
-        //populating map array and creating crate and warehousekeeper objects
-            
+        //populating map array and creating crate and warehousekeeper objects.
+            /*
+            A space charecter represents a floor
+            X represents a wall
+            . represents a diamond
+            * represents a crate
+            @ represents a warehosueKeeper
+        
+            It is assumed that crates and warehouseKeeper start on a floor.
+            */
         int i = 0; 
         int cratesAdded = 0;
         while (i < levelHeight) {            
@@ -125,8 +137,7 @@ public class Level extends JLayeredPane implements ActionListener{
                 j++; 
             }
             i++; 
-        }      
-            
+        }                  
         System.out.println("Arrays Populated");
     }    
     
@@ -134,6 +145,7 @@ public class Level extends JLayeredPane implements ActionListener{
         int i = 0;
         while (i < crates.length) {
             crates[i].resetPosition();
+            toggleCrateOnDiamond(i,false);
             i++;
         }
         warehouseKeeper.resetPosition();   
@@ -154,7 +166,7 @@ public class Level extends JLayeredPane implements ActionListener{
             
     public boolean moveElement(String direction) {
         boolean canMove = true;
-        Coordinate p;
+        Coordinate p; //p is the new position of the element if it moves in the given direction 
         if (direction == "up") {
             p = new Coordinate(warehouseKeeper.getXPosition(),warehouseKeeper.getYPosition()-1);
         } else if (direction == "left") {
@@ -165,6 +177,7 @@ public class Level extends JLayeredPane implements ActionListener{
             p = new Coordinate(warehouseKeeper.getXPosition()+1,warehouseKeeper.getYPosition());
         }
         
+        //Checks if warehouseKeeper is moving into a wall before checking if it is moving into a crate.
         if (map[p.getY()][p.getX()].getElementName() == "Wall") {
             System.out.println("Warehouse keeper tried to walk into wall at" + warehouseKeeper.getX() +" , " + warehouseKeeper.getY()+1);
             canMove = false;
@@ -172,10 +185,12 @@ public class Level extends JLayeredPane implements ActionListener{
             for (int i=0; i < numberOfCrates; i++) {
                 if (crates[i].getXPosition() == p.getX() && crates[i].getYPosition() == p.getY()) {
                     System.out.println("warehouse keper moved into crate " + i);
-                    canMove = moveElement(i,direction);
+                    canMove = moveElement(i,direction); //if the crate was able to move then the warehouseKeeper can move. if the crate cant then the warehouseKeeper cant.
                 }
             }
-        }                
+        }
+        
+        //if the warehouseKeeper can move to p it is moved to p and the numberOfMovesLabel is updated. 
         if (canMove == true) {           
             warehouseKeeper.setCurrentPosition(p);
             numberOfMoves++;
@@ -186,7 +201,7 @@ public class Level extends JLayeredPane implements ActionListener{
         
     public boolean moveElement(int c, String direction) {
         boolean canMove = true;
-        Coordinate p;
+        Coordinate p; //p is the new position of the element if it moves in the given direction
         if (direction == "up") {
             p = new Coordinate(crates[c].getXPosition(),crates[c].getYPosition()-1);
         } else if (direction == "left") {
@@ -197,6 +212,7 @@ public class Level extends JLayeredPane implements ActionListener{
             p = new Coordinate(crates[c].getXPosition()+1,crates[c].getYPosition());
         }
         
+        //Checks if crate is moving into a wall before checking if it is moving into another crate.
         if (map[p.getY()][p.getX()].getElementName() == "Wall") {
             System.out.println("Crate keeper tried to move into wall at" + crates[c].getX() +" , " + crates[c].getY()+1);
             canMove = false;
@@ -243,7 +259,7 @@ public class Level extends JLayeredPane implements ActionListener{
     
     //Getting crate Y position
     public int getElementYPosition(int crateNumber) {
-        return crates[crateNumber].getXPosition();
+        return crates[crateNumber].getYPosition();
     }
     
     public String getElementRepresentingCharecter(int x, int y) {

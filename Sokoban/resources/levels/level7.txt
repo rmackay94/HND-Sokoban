@@ -1,0 +1,14 @@
+17
+11
+9
+XXXXXXXXXXXXXXXXX
+X    @          X
+X               X
+X   **     *    X
+X          *    X
+X               X
+X  .     *      X
+X .*.   *X*     X
+X  .     *      X
+X               X
+XXXXXXXXXXXXXXXXX

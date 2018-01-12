@@ -5,9 +5,11 @@
  */
 package sokoban;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -71,12 +73,13 @@ public class SokobanGame extends JComponent implements ActionListener{
         moveRightButton.addActionListener(this);
         nextLevelButton.addActionListener(this);
         
-        currentLevelNum = 0;
-        
+        //Loads the first level when game starts.
+        currentLevelNum = 0;        
         loadLevel(currentLevelNum);
     }
     
     public void loadLevel(int levelNumber) {
+        //trys to load a level and handles any exceptrions thrown
         currentLevel = new Level(currentLevelNum);
         boolean exceptionOccured = false;
         try {
@@ -84,8 +87,47 @@ public class SokobanGame extends JComponent implements ActionListener{
         } catch (FileNotFoundException ex){
             System.out.println("problem with level.loadmap  message:" + ex.getMessage());
             JLabel errorMessage = new JLabel("Could not find level file. Error: " + ex.getMessage());
-            this.add(errorMessage);
-            errorMessage.setBounds(100,100,100,100);
+            mainWindow.add(errorMessage);
+            errorMessage.setBounds(100,100,800,40);
+            errorMessage.setVisible(true);
+            
+            moveUpButton.setEnabled(false);
+            moveLeftButton.setEnabled(false);
+            moveDownButton.setEnabled(false);
+            moveRightButton.setEnabled(false);
+            
+            exceptionOccured = true;
+        } catch (NullPointerException ex) {
+            System.out.println("problem with level.loadmap  message:" + ex.getMessage());
+            JLabel errorMessage = new JLabel("Problem with file found. Error: " + ex.getMessage());
+            mainWindow.add(errorMessage);
+            errorMessage.setBounds(100,100,800,40);
+            errorMessage.setVisible(true);
+            
+            moveUpButton.setEnabled(false);
+            moveLeftButton.setEnabled(false);
+            moveDownButton.setEnabled(false);
+            moveRightButton.setEnabled(false);
+            
+            exceptionOccured = true;
+        } catch (NoSuchElementException ex) {
+            System.out.println("problem with level.loadmap  message:" + ex.getMessage());
+            JLabel errorMessage = new JLabel("Problem with file found. Error: " + ex.getMessage());
+            mainWindow.add(errorMessage);
+            errorMessage.setBounds(100,100,800,40);
+            errorMessage.setVisible(true);
+            
+            moveUpButton.setEnabled(false);
+            moveLeftButton.setEnabled(false);
+            moveDownButton.setEnabled(false);
+            moveRightButton.setEnabled(false);
+            
+            exceptionOccured = true;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("problem with level.loadmap  message:" + ex.getMessage());
+            JLabel errorMessage = new JLabel("Problem with file found. Error: " + ex.getMessage());
+            mainWindow.add(errorMessage);
+            errorMessage.setBounds(100,100,800,40);
             errorMessage.setVisible(true);
             
             moveUpButton.setEnabled(false);
@@ -125,9 +167,11 @@ public class SokobanGame extends JComponent implements ActionListener{
         } else if (e.getSource() == this.nextLevelButton) {
             currentLevelNum ++;
             
+            //removes currentLevel from the mainwindow then repaints mainwindow to remove the image of the level before the new level is loaded.
             mainWindow.remove(currentLevel);
             mainWindow.repaint();
             loadLevel(currentLevelNum);
+            
             moveUpButton.setEnabled(true);
             moveLeftButton.setEnabled(true);
             moveDownButton.setEnabled(true);
@@ -139,6 +183,7 @@ public class SokobanGame extends JComponent implements ActionListener{
     }
     
     
+    //If the level has been one the movement buttons are disabled and the next level button is enabled.
     public void nextLevel() {
         if (checkForWin() == true) {
             moveUpButton.setEnabled(false);
@@ -153,7 +198,10 @@ public class SokobanGame extends JComponent implements ActionListener{
     
 
     public boolean checkForWin() {
+        
         boolean win = true;
+        
+        //Loops through all crates and checks if they are on a diamond.
         int i = 0;
         while (i < currentLevel.getNumberOfCrates()) {
             if (currentLevel.getElementRepresentingCharecter (currentLevel.getElementXPosition(i), currentLevel.getElementYPosition(i)) != ".") {                
